@@ -1,8 +1,24 @@
 import React from 'react'
+import { Container } from 'react-bootstrap';
+import { Outlet } from 'react-router-dom';
+import Header from './components/Header';
+import Footer from './components/Footer';
 
 const App = () => {
   return (
-    <h1>Welcome to ProShop</h1>
+    <>
+
+    {/* Custom component made */}
+    <Header/>
+
+    {/* main component with padding along y-axis with 3 units */}
+    <main className="py-3">
+      <Container>
+    <Outlet />
+    </Container>
+    </main>
+    <Footer/>
+    </>
   )
 }
 
