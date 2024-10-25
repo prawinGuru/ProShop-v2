@@ -5,9 +5,11 @@ import dotenv from 'dotenv';
 
 // reads the .env file and loads the variable into process.env (global object that contains env variables for current process)
 dotenv.config();
+import connectDB from './config/db.js';
 import products from './data/products.js';
 
 const port = process.env.PORT || 5000;
+connectDB(); //Connect to MongoDB
 const app = express();
 
 // (URL/ API endpoints, (req, res as arrow function))

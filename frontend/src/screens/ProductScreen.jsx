@@ -8,11 +8,13 @@ import Rating from '../components/Rating';
 import axios from 'axios';
 
 const ProductScreen = () => {
+    // initialised as empty object
     const [product, setProduct] = useState({});
 
     // destructures the id from object returned and assigns the value to new variable productId
     const {id:productId} = useParams();
 
+    // contains function and optional dependency array
     useEffect(() => {
     const fetchProduct = async () => {
     const {data} = await axios.get(`/api/products/${productId}`)
@@ -20,6 +22,8 @@ const ProductScreen = () => {
     }
 
     fetchProduct();
+
+    // runs whenever productId changes
     }, [productId]);
     
     console.log(product);
