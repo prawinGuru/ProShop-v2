@@ -2,11 +2,13 @@ import express from 'express';
 
 // setting up server to read environment variables from .env file
 import dotenv from 'dotenv';
+import connectDB from './config/db.js';
+import productRoutes from './routes/productRoutes.js'
+import { notFound, errorHandler } from './middleware/errorMiddleware.js';
 
 // reads the .env file and loads the variable into process.env (global object that contains env variables for current process)
 dotenv.config();
-import connectDB from './config/db.js';
-import products from './data/products.js';
+
 
 const port = process.env.PORT || 5000;
 connectDB(); //Connect to MongoDB
@@ -17,16 +19,9 @@ app.get('/', (req, res) => {
 res.send('API is running...');
 });
 
-app.get('/api/products', (req, res) => {
-res.json(products);
-});
-
-// :id is the placeholder or route parameter
-//params.id == :id
-app.get('/api/products/:id', (req, res) => {
-    const product = products.find((p) => p._id === req.params.id)
-    res.json(product);
-});
+app.use('/api/products', productRoutes);
+app.use(notFound);
+app.use(errorHandler);
 
 // starts the express server and listens to the port.
 // Once the port starts, it this message is shoen in console
