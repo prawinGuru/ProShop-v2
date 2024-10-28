@@ -1,32 +1,24 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
 import { Row, Col } from 'react-bootstrap'
 import Product from '../components/Product'
-import axios from 'axios';
+import Loader from '../components/Loader'
+import Message from '../components/Message'
+import { useGetProductsQuery } from '../slices/productsApiSlice'
 
 const HomeScreen = () => {
 
-  // [state, function (used to update the state when data is fetched)]
-  // initailised as empty array
-  const [products, setProducts] = useState([]);
-
-  // perform action after the component renders
-  useEffect(() => {
-    const fetchProducts = async () => {
-
-      // no need to put the whole URL (http://localhost:5000) it gets from proxy
-      // extract only data from response
-      const {data} = await axios.get('/api/products');
-
-      //set in products state using setProduct function
-      setProducts(data)
-    };
-
-    // runs only once when the component renders first
-    fetchProducts();
-  }, []);
+  // Destructures the result of useGetProductsQuery() into three variables:
+  // data: products - Renames data to products
+  // isLoading: Boolean indicating if the request is still loading.
+// error: Holds error information if the API call fails.
+const {data: products, isLoading, error} = useGetProductsQuery();
   return (
     <>
+    {isLoading ? (
+      <Loader/>
+    ) : error ? (
+    <Message variant='danger'>{error?.data?.message || error.error}</Message>
+    ) : (<>
     <h1>Latest Products</h1>
     <Row>
         {products.map((Object) => (
@@ -38,6 +30,9 @@ const HomeScreen = () => {
             </Col>
         ))}
     </Row>
+    </>)
+    }
+    
     </>
   )
 }
