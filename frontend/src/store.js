@@ -1,6 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
 import { apiSlice } from './slices/apiSlice.js';
 import cartSliceReducer from './slices/cartSlice.js';
+import authSliceReducer from './slices/authSlice.js';
 
 const store = configureStore({
     reducer: {
@@ -9,6 +10,7 @@ const store = configureStore({
         // This enables the store to manage state updates based on actions across the entire application.
         [apiSlice.reducerPath]: apiSlice.reducer,
         cart: cartSliceReducer,
+        auth: authSliceReducer,
     },
 
     //  intercept actions before they reach the reducer  like async operations, logging, error handling, etc.
