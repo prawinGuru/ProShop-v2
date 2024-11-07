@@ -6,7 +6,7 @@ import Message from '../../components/Message'
 import Loader from '../../components/Loader'
 import FormContainer from '../../components/FormContainer'
 import { toast } from 'react-toastify'
-import { useUpdateProductMutation, useGetProductDetailsQuery, useUploadProductImageMutation } from '../../slices/productsApiSlice'
+import { useUpdateProductMutation, useGetProductDetailsQuery } from '../../slices/productsApiSlice'
 
 
 const ProductEditScreen = () => {
@@ -23,7 +23,7 @@ const ProductEditScreen = () => {
     const {data: product, isLoading, refetch, error} = useGetProductDetailsQuery(productId);
 
     const [updateProduct, {isLoading: loadingUpdate}] = useUpdateProductMutation();
-    const [uploadProductImage, {isLoading: loadingUpload}] = useUploadProductImageMutation();
+    // const [uploadProductImage, {isLoading: loadingUpload}] = useUploadProductImageMutation();
     const navigate = useNavigate();
 
 useEffect(() => {
@@ -62,17 +62,17 @@ if(product){
         }
     }
 
-    const uploadFileHandler = async (e) => {
-        const formData = new FormData();
-        formData.append('image', e.target.files[0]);
-        try {
-            const res = await uploadProductImage(formData).unwrap();
-            toast.success(res.message);
-            setImage(res.image)
-        } catch (err) {
-            toast.error(err?.data?.message || err.error);
-        }
-    }
+    // const uploadFileHandler = async (e) => {
+    //     const formData = new FormData();
+    //     formData.append('image', e.target.files[0]);
+    //     try {
+    //         const res = await uploadProductImage(formData).unwrap();
+    //         toast.success(res.message);
+    //         setImage(res.image)
+    //     } catch (err) {
+    //         toast.error(err?.data?.message || err.error);
+    //     }
+    // }
 
   return (
     <>
@@ -109,7 +109,8 @@ if(product){
                     onChange={(e) => setImage}></Form.Control>
                     <Form.Control type='file'
                     label='Choose file'
-                    onChange={uploadFileHandler}></Form.Control>
+                    // onChange={uploadFileHandler}
+                    ></Form.Control>
                 </Form.Group>
 
                 <Form.Group controlId='brand' className='my-2'>
