@@ -70,6 +70,7 @@ const ProductEditScreen = () => {
     }
   };
 
+  // we are having seperate api for to store the image at the backend server in the public file called "uploads"
   const uploadFileHandler = async (e) => {
       const formData = new FormData();
       formData.append('image', e.target.files[0]);
