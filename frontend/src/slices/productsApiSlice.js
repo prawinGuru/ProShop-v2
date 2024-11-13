@@ -5,8 +5,11 @@ import { apiSlice } from "./apiSlice";
 export const productsApiSlice = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     getProducts: builder.query({
-      query: () => ({
+      query: ({ pageNumber }) => ({
         url: PRODUCTS_URL,
+        params: {
+          pageNumber,
+        },
       }),
       providesTags: ["Product"], // if not we have to refecth the page
       keepUnusedDataFor: 5, // data will be kept in catch cache for 5 seconds after it's no longer in use
@@ -51,7 +54,7 @@ export const productsApiSlice = apiSlice.injectEndpoints({
         method: "POST",
         body: data,
       }),
-      invalidatesTags:['Product']
+      invalidatesTags: ["Product"],
     }),
   }),
 });
@@ -63,5 +66,5 @@ export const {
   useUpdateProductMutation,
   useUploadProductImageMutation,
   useDeleteProductMutation,
-  useCreateReviewMutation
+  useCreateReviewMutation,
 } = productsApiSlice;
