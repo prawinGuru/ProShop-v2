@@ -18,11 +18,11 @@ const UserListScreen = () => {
   const deleteHandler = async (id) => {
     if (window.confirm("Are you sure")) {
       try {
-        await deleteUser(id);
+        await deleteUser(id).unwrap();
         toast.success("User deleted");
         refetch();
       } catch (error) {
-        toast.error(error?.data?.Message || error?.error);
+        toast.error(error?.data?.message || error?.error);
       }
     }
   };
