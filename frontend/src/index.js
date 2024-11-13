@@ -34,7 +34,6 @@ import UserListScreen from "./screens/admin/UserListScreen.jsx";
 import ProductEditScreen from "./screens/admin/ProductEditScreen.jsx";
 import UserEditScreen from "./screens/admin/UserEditScreen.jsx";
 
-
 // createBrowserRouter: Creates the router and defines the routes for the app.
 // uses browser's history API to manage the navigation in your application.
 //like pushing and popping entries from the browser history stack
@@ -64,6 +63,10 @@ const router = createBrowserRouter(
       <Route path="" element={<AdminRoute />}>
         <Route path="/admin/orderlist" element={<OrderListScreen />} />
         <Route path="/admin/productlist" element={<ProductListScreen />} />
+        <Route
+          path="/admin/productlist/:pageNumber"
+          element={<ProductListScreen />}
+        />
         <Route path="/admin/product/:id/edit" element={<ProductEditScreen />} />
         <Route path="/admin/userList" element={<UserListScreen />} />
         <Route path="/admin/user/:id/edit" element={<UserEditScreen />} />

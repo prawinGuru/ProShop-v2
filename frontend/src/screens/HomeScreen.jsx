@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Product from "../components/Product";
+import Paginate from "../components/Paginate";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 
 const HomeScreen = () => {
@@ -23,8 +24,8 @@ const HomeScreen = () => {
 
   // // const{data} will destructured the object id form the url
   // and data is named as product
-  const{pageNumber}=useParams()
-  const { data,isLoading, error } = useGetProductsQuery({pageNumber});
+  const { pageNumber } = useParams();
+  const { data, isLoading, error } = useGetProductsQuery({ pageNumber });
 
   return (
     <>
@@ -44,6 +45,7 @@ const HomeScreen = () => {
               </Col>
             ))}
           </Row>
+          <Paginate pages={data.pages} page={data.page} />
         </>
       )}
     </>
