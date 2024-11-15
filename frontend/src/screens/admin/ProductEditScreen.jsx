@@ -26,13 +26,12 @@ const ProductEditScreen = () => {
   const {
     data: product,
     isLoading,
-    refetch,
     error,
   } = useGetProductDetailsQuery(productId);
 
   const [updateProduct, { isLoading: loadingUpdate }] =
     useUpdateProductMutation();
-  const [uploadProductImage, {isLoading: loadingUpload}] = useUploadProductImageMutation();
+  const [uploadProductImage,{isLoading:loadingupload}] = useUploadProductImageMutation();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -131,6 +130,8 @@ const ProductEditScreen = () => {
                 onChange={uploadFileHandler}
               ></Form.Control>
             </Form.Group>
+
+            {loadingupload && <Loader/>}
 
             <Form.Group controlId="brand" className="my-2">
               <Form.Label>Brand</Form.Label>

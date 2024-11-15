@@ -1,14 +1,7 @@
 import React from "react";
 import { useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
-import {
-  Row,
-  Col,
-  ListGroup,
-  Image,
-  Button,
-  Card,
-} from "react-bootstrap";
+import { Row, Col, ListGroup, Image, Button, Card } from "react-bootstrap";
 import { PayPalButtons, usePayPalScriptReducer } from "@paypal/react-paypal-js";
 import Message from "../components/Message";
 import Loader from "../components/Loader";
@@ -51,32 +44,28 @@ const OrderScreen = () => {
   const { userInfo } = useSelector((state) => state.auth);
 
   //we need paypal scrip to be runned in the brower to have the transaction
-  useEffect(
-    () => {
-      if (!errorPaypal && !loadingPayPal && paypal.clientId) {
-        const loadPayPalScript = async () => {
-          paypalDispatch({
-            //these are structure from the documentation so dont get confused
-            type: "resetOptions", //to setting up the client id this command is used
-            value: {
-              "client-id": paypal?.clientId,
-              currency: "USD",
-            },
-          });
-          paypalDispatch({ type: "setLoadingStatus", value: "pending" }); //after setting up the client id,have to set the loading to have the payment process
-        };
+  useEffect(() => {
+    if (!errorPaypal && !loadingPayPal && paypal.clientId) {
+      const loadPayPalScript = async () => {
+        paypalDispatch({
+          //these are structure from the documentation so dont get confused
+          type: "resetOptions", //to setting up the client id this command is used
+          value: {
+            "client-id": paypal?.clientId,
+            currency: "USD",
+          },
+        });
+        paypalDispatch({ type: "setLoadingStatus", value: "pending" }); //after setting up the client id,have to set the loading to have the payment process
+      };
 
-        if (order && !order.isPaid) {
-          if (!window.paypal) {
-            //if browser doesnt have paypal script ,,then only load the paypal script
-            loadPayPalScript();
-          }
+      if (order && !order.isPaid) {
+        if (!window.paypal) {
+          //if browser doesnt have paypal script ,,then only load the paypal script
+          loadPayPalScript();
         }
       }
-    },
-    [order, paypal, paypalDispatch, loadingPayPal],
-    errorPaypal
-  );
+    }
+  }, [order, paypal, paypalDispatch, loadingPayPal, errorPaypal]);
 
   //all below are in the paypal documentation
 

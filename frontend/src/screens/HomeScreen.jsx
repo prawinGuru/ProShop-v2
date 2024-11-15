@@ -9,6 +9,7 @@ import Product from "../components/Product";
 import Paginate from "../components/Paginate";
 import { useGetProductsQuery } from "../slices/productsApiSlice";
 import ProductCarousel from "../components/ProductCarousel";
+import Meta from "../components/Meta";
 
 const HomeScreen = () => {
   // const [products, setProducts] = useState([]);
@@ -48,6 +49,7 @@ const HomeScreen = () => {
         </Message>
       ) : (
         <>
+        <Meta/>
           <h1>Latest Product</h1>
           <Row>
             {data.products.map((Object) => (
