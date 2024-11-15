@@ -5,11 +5,17 @@ import Product from "../models/productModel.js";
 // @route  GET/api/products
 // @access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 4;
+  const pageSize = 8;
   const page = Number(req.query.pageNumber) || 1;
-  const count = await Product.countDocuments();
+//regex --> for if any related search ,,will bring up all the products having that word,,we dont have to giv exact word while searching ..if we search oppo..all the name containes oppo will come to search
+//optiond-->setting lower case
+  const keyword = req.query.keyword
+    ? { name: { $regex: req.query.keyword,$options:"i" } }
+    : {};
 
-  const products = await Product.find({})
+  const count = await Product.countDocuments({...keyword});
+
+  const products = await Product.find({...keyword})
     .limit(pageSize)
     .skip(pageSize * (page - 1));
   res.json({ products, page, pages: Math.ceil(count / pageSize) });
