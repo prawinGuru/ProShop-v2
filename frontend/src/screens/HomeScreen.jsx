@@ -2,7 +2,7 @@
 import React from "react";
 import { Row, Col } from "react-bootstrap";
 // import axios from "axios";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Loader from "../components/Loader";
 import Message from "../components/Message";
 import Product from "../components/Product";
@@ -32,6 +32,7 @@ const HomeScreen = () => {
 
   return (
     <>
+    {keyword && <Link to='/' className="btn btn-light mb-4">Go Back</Link>}
       {isLoading ? (
         <Loader />
       ) : error ? (
