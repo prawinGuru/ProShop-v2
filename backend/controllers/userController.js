@@ -11,7 +11,7 @@ const authUser = asyncHandler(async (req, res) => {
 
   const user = await User.findOne({ email });
 
-  if (user && (await user.matchPassword(password))) {
+  if (user && (await user.matchPassword(password))) {//matchPassword is schema method..that compares password from fe and backend bcrypt password
     generateToken(res, user._id);
 
     res.status(200).json({

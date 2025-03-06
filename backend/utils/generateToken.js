@@ -10,7 +10,7 @@ const generateToken = (res, userId) => {
             // secret key for signing the token
              process.env.JWT_SECRET, 
              {
-            expiresIn: '1d'
+            expiresIn: '5d'
         });
 
         // Set jwt as Http- Only cookie

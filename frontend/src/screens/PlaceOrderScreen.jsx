@@ -22,7 +22,7 @@ const PlaceOrderScreen = () => {
   const [createOrder, { isLoading, error }] = useCreateOrderMutation();
 
   useEffect(() => {
-    if (!cart.shippingAddress.address) {
+    if (!cart.shippingAddress.address) {//if any of shipping address or payment details it will bring back to respective page
       navigate("/shipping");
     } else if (!cart.paymentMethod) {
       navigate("/payment");

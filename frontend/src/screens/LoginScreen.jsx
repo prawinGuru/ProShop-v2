@@ -31,7 +31,7 @@ const LoginScreen = () => {
 
 //flow-1
   //if user logged  in already and then going for cart and clicking proceed to check out ,it will automaticaly comes to the page login
-  //and since user already logged in,we dont need to have login scenarios and in order to skiiping that scenario
+  //and since user already logged(userInfo found) in,we dont need to have login scenarios and in order to skiiping that scenario
   //the useEffect is mentioned above the submit scenario,it will handle this
   //and automatically redirects to the page "shipping" 
   useEffect(()=>{

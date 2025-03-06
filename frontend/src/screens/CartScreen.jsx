@@ -26,7 +26,7 @@ const CartScreen = () => {
   };
 
   const removeFromCartHandler = async (id) => {
-    dispatch(removeFromCart(id)); // whatever we pass in here that as astion.payload
+    dispatch(removeFromCart(id)); // whatever we pass in here that as action.payload
   };
 
   const checkOutHandler = () => {

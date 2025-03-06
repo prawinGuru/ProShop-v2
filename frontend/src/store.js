@@ -8,9 +8,9 @@ const store = configureStore({
 
         // To add state logic for different features (like cart management here), you add reducers from different slices to the store. 
         // This enables the store to manage state updates based on actions across the entire application.
-        [apiSlice.reducerPath]: apiSlice.reducer,
-        cart: cartSliceReducer,
-        auth: authSliceReducer,
+        [apiSlice.reducerPath]: apiSlice.reducer,//using createAPi
+        cart: cartSliceReducer,//createSlice
+        auth: authSliceReducer,//createSlice
     },
 
     //  intercept actions before they reach the reducer  like async operations, logging, error handling, etc.

@@ -12,7 +12,7 @@ const protect = asyncHandler(async (req, res, next) => {
   if (token) {
     try {
       const decoded = jwt.verify(token, process.env.JWT_SECRET);
-      req.user = await User.findById(decoded.userId).select("-password"); //here jwt is name we set in userController while doing jwt.sign and it will return eevrythiing without password
+      req.user = await User.findById(decoded.userId).select("-password"); //here jwt is name we setted in userController while doing jwt.sign and it will return eevrythiing without password
       //this req above will be share with all routed nd we can access the user like req.user in any route
       next();
     } catch (error) {

@@ -71,8 +71,8 @@ const ProductEditScreen = () => {
 
   // we are having seperate api for to store the image at the backend server in the public file called "uploads"
   const uploadFileHandler = async (e) => {
-      const formData = new FormData();
-      formData.append('image', e.target.files[0]);
+      const formData = new FormData();//creates Form object
+      formData.append('image', e.target.files[0]);//first parameter as key ,second as value
       try {
           const res = await uploadProductImage(formData).unwrap();
           toast.success(res.message);

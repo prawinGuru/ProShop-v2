@@ -23,9 +23,9 @@ const cartSlice = createSlice({
         state.cartItems = [...state.cartItems, item]; //spreading because we are going to ass new item in the cart
       }
 
-      return updateCart(state);
+      return updateCart(state);// will handle prices and set state to localstorage
     },
-    removeFromCart: (state, action) => {
+    removeFromCart: (state, action) => {//action has product.id
       state.cartItems = state.cartItems.filter((x) => x._id !== action.payload); //retrun everything except that we want to delete
       return updateCart(state);
     },
