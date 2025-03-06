@@ -48,6 +48,18 @@ app.use("/uploads", express.static(path.join(__dirname, "/uploads")));// Set the
 //this route directly goes to the file productRoutes
 // and if any problem with this route above,,exoress will look for any middleware defined immediately below this code to handle unmatching url error
 // and express will finf "notFoun" middleWare
+
+if(process.env.NODE_ENV==='production'){
+  app.use(express.static(path.join(__dirname,'/frontend/build')));
+
+  app.get('*',(req,res)=>
+  res.sendFile(path.resolve(__dirname,'frontend','build','index.html')))
+}else{
+  app.get("/", (req, res) => {
+    res.send("API is running...");
+  });
+}
+
 app.use(notFound);
 app.use(errorHandler);
 

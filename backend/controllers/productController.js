@@ -5,7 +5,7 @@ import Product from "../models/productModel.js";
 // @route  GET/api/products
 // @access Public
 const getProducts = asyncHandler(async (req, res) => {
-  const pageSize = 8;//no of ecords
+  const pageSize = process.env.PAGINATION_LIMIT;//no of ecords
   const page = Number(req.query.pageNumber) || 1;//pagenumber
   //regex --> for if any related search ,,will bring up all the products having that word,,we dont have to giv exact word while searching ..if we search oppo..all the name containes oppo will come to search
   //optiond-->setting lower case
